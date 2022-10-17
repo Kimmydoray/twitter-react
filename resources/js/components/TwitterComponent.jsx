@@ -84,6 +84,15 @@ class TwitterComponent extends Component {
             console.log(event);
             window.location.href = window.location.origin + "/twitter";
         }
+        const style = {
+            tweetContainer: {
+                margin: 'unset'
+            },
+            // carouselContatiner: {
+            //     width: '70%',
+            //     margin: '0 auto'
+            // }
+        };
         // const heading = "Laravel 9 Vite  with React JS";
         return (
             <div>
@@ -95,36 +104,42 @@ class TwitterComponent extends Component {
                                 <h1 className="dark:text-white">Twitter</h1>
                             </div>
                             <div className="">
-                                <div className="grid grid-cols-1 md:grid-cols-2">
-                                    <div className="tweet-wrap p-5" if={this.state.stages}>
-                                        <CCarousel controls activeIndex={this.state.twitter.stage_level -1} dark={true} interval={false} >
-                                            <CCarouselItem>
-                                                <img className="d-block w-100" src='/images/stage1.png' alt="slide 1"/>
-                                            </CCarouselItem>
-                                            <CCarouselItem>
-                                                <img className="d-block w-100" src='/images/stage2.png' alt="slide 2"/>
-                                            </CCarouselItem>
-                                            <CCarouselItem>
-                                                <img className="d-block w-100" src='/images/stage3.png' alt="slide 3"/>
-                                            </CCarouselItem>
-                                            <CCarouselItem>
-                                                <img className="d-block w-100" src='/images/stage4.png' alt="slide 3"/>
-                                            </CCarouselItem>
-                                            <CCarouselItem>
-                                                <img className="d-block w-100" src='/images/stage5.png' alt="slide 3"/>
-                                            </CCarouselItem>
-                                        </CCarousel>
-                                        
-                                        <div className="" if={this.state.twitter.stage_level}>
-                                            Level { this.state.twitter.stage_level }
-                                        </div>
-                                    </div>
-                                    <div className="tweet-wrap p-5">
+                                <div className="grid grid-cols-1">
+                                    { (this.state.stages).length? 
+                                        <div className="tweet-wrap p-5" style={style.tweetContainer} if={this.state.stages}>
                                     
-                                        <div className="alert alert-danger pb-15 text-danger" id="close" v-if="error">
+                                            <CCarousel controls activeIndex={this.state.twitter.stage_level - 1} dark={true} interval={false} >
+                                                <CCarouselItem>
+                                                    <img className="d-block w-100" src='/images/stage1.png' alt="slide 1"/>
+                                                </CCarouselItem>
+                                                <CCarouselItem>
+                                                    <img className="d-block w-100" src='/images/stage2.png' alt="slide 2"/>
+                                                </CCarouselItem>
+                                                <CCarouselItem>
+                                                    <img className="d-block w-100" src='/images/stage3.png' alt="slide 3"/>
+                                                </CCarouselItem>
+                                                <CCarouselItem>
+                                                    <img className="d-block w-100" src='/images/stage4.png' alt="slide 3"/>
+                                                </CCarouselItem>
+                                                <CCarouselItem>
+                                                    <img className="d-block w-100" src='/images/stage5.png' alt="slide 3"/>
+                                                </CCarouselItem>
+                                            </CCarousel>
+                                            
+                                            { this.state.twitter.stage_level? 
+                                                <div className="text-center">
+                                                    Level { this.state.twitter.stage_level }
+                                                </div>
+                                            : '' }
+                                        </div>
+                                    : '' }
+                                    <div className="tweet-wrap p-5 mt-0">
+                                        { this.state.error? 
+                                        <div className="alert alert-danger pb-15 text-danger" id="close">
                                             <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             <span className="text-danger">{ this.state.error_message }</span>
                                         </div>
+                                        : ''}
                                         <div className="tweet-header">
                                             <img src={this.state.twitter.profile_image_url_https} alt="" className="avator"/>
                                             <div className="tweet-header-info">
