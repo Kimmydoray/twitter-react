@@ -1,4 +1,8 @@
+import { times } from 'lodash';
 import React, { Component } from 'react';
+import { CAlert, CCarousel, CCarouselItem } from '@coreui/react';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '@coreui/coreui/dist/css/coreui.min.css'
 
 class TwitterComponent extends Component {
 
@@ -8,7 +12,6 @@ class TwitterComponent extends Component {
         validationErrors: {},
         processing: false,
         error: false,
-        error_message: '',
         stages: ''
     };
 
@@ -21,16 +24,60 @@ class TwitterComponent extends Component {
             this.setState({
                 twitter: response
             });
+        }).catch(({response})=>{
+            if(response.status===422){
+                this.setState({
+                    validationErrors: response.data.errors
+                });
+            }else{
+                this.setState({
+                    validationErrors: {}
+                });
+                alert(response.data.message)
+            }
+        }).finally(()=>{
+            this.setState({
+                processing: false
+            })
         })
-        .catch(err => console.error(err));
-        // console.log(api); 
-        // this.setState({
-        //     twitter: api
-        // });
     }
+
+    getStage = async() => {
+        await axios.get('/api/stage').then(({data})=>{
+            this.setState({
+                stages: data
+            });
+        }).catch(({response})=>{
+            if(response.status===422){
+                this.setState({
+                    validationErrors: response.data.errors
+                });
+            }else{
+                this.setState({
+                    validationErrors: {}
+                });
+                alert(response.data.message)
+            }
+        }).finally(()=>{
+            this.setState({
+                processing: false
+            })
+        })
+    }
+
     
     componentDidMount() {
-        this.getTwitter()
+        this.getTwitter();
+        this.getStage();
+
+        // if(Object.keys(this.props.location.query).length) {
+        //     // this.error = true
+        //     this.setState({
+        //         error_message: this.props.location.query.message
+        //     });
+        //     const toaster = createToaster({ position: 'top' });
+        //     toaster.warning(this.error_message);
+        // }
     }
     render() {
         const retweet = async(event) => {
@@ -49,11 +96,34 @@ class TwitterComponent extends Component {
                             </div>
                             <div className="">
                                 <div className="grid grid-cols-1 md:grid-cols-2">
+                                    <div className="tweet-wrap p-5" if={this.state.stages}>
+                                        <CCarousel controls activeIndex={this.state.twitter.stage_level -1} dark={true} interval={false} >
+                                            <CCarouselItem>
+                                                <img className="d-block w-100" src='/images/stage1.png' alt="slide 1"/>
+                                            </CCarouselItem>
+                                            <CCarouselItem>
+                                                <img className="d-block w-100" src='/images/stage2.png' alt="slide 2"/>
+                                            </CCarouselItem>
+                                            <CCarouselItem>
+                                                <img className="d-block w-100" src='/images/stage3.png' alt="slide 3"/>
+                                            </CCarouselItem>
+                                            <CCarouselItem>
+                                                <img className="d-block w-100" src='/images/stage4.png' alt="slide 3"/>
+                                            </CCarouselItem>
+                                            <CCarouselItem>
+                                                <img className="d-block w-100" src='/images/stage5.png' alt="slide 3"/>
+                                            </CCarouselItem>
+                                        </CCarousel>
+                                        
+                                        <div className="" if={this.state.twitter.stage_level}>
+                                            Level { this.state.twitter.stage_level }
+                                        </div>
+                                    </div>
                                     <div className="tweet-wrap p-5">
                                     
                                         <div className="alert alert-danger pb-15 text-danger" id="close" v-if="error">
                                             <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <span className="text-danger">{ this.error_message }</span>
+                                            <span className="text-danger">{ this.state.error_message }</span>
                                         </div>
                                         <div className="tweet-header">
                                             <img src={this.state.twitter.profile_image_url_https} alt="" className="avator"/>

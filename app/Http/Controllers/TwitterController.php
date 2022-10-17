@@ -153,7 +153,7 @@ class TwitterController extends Controller
         if(isset($result->errors)) {
             $message = $result->errors[0]->message;
             // return $this->getTwitterPost($message);
-            return Redirect::to('/get/twitter?message=' . $message);
+            return Redirect::to('/?message=' . $message);
         } else {
             $data = [
                 'id' => $result->id_str,
@@ -166,7 +166,7 @@ class TwitterController extends Controller
                 'profile_image_url_https' => $result->user->profile_image_url_https
             ];
         
-            return Redirect::to('/get/twitter');
+            return Redirect::to('/');
         }
         
         // return response()->view('welcome', $data);

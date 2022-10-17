@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/twitter', [TwitterController::class, 'connectToTwitter'])->name('media.twitter');
 Route::get('/twitter/callback', [TwitterController::class, 'twitterCallback'])->name('media.callback');
-// Route::get('/get/twitter', [TwitterController::class, 'getTwitterPost'])->name('twitter.post');
+Route::get('/get/twitter', [TwitterController::class, 'getTwitterPost'])->name('twitter.post');
 // Route::get('/hashtag/count', [TwitterController::class, 'getHashtagCount'])->name('twitter.hashtag');
 
 // Route::get('/post/status', [TwitterController::class, 'setStagePerPost'])->name('twitter.hashtag');
