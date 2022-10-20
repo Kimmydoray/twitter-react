@@ -27,6 +27,9 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/account', "App\Http\Controllers\AccountController@index");
     Route::post('/account/update', "App\Http\Controllers\AccountController@update");
+
+    Route::post('/login/sanctum', "App\Http\Controllers\LoginSanctumController@authenticate");
+
     
 
     // Route::get('/twitter', "App\Http\Controllers\TwitterController@getTwitterPost");
