@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/twitter', [TwitterController::class, 'connectToTwitter'])->name('media.twitter');
+// Route::get('/twitter', [TwitterController::class, 'connectToTwitter'])->name('media.twitter');
 Route::get('/twitter/callback', [TwitterController::class, 'twitterCallback'])->name('media.callback');
 Route::get('/get/twitter', [TwitterController::class, 'getTwitterPost'])->name('twitter.post');
 // Route::get('/hashtag/count', [TwitterController::class, 'getHashtagCount'])->name('twitter.hashtag');

@@ -1,6 +1,6 @@
 import { times } from 'lodash';
 import React, { Component } from 'react';
-import { CAlert, CCarousel, CCarouselItem } from '@coreui/react';
+import { CCarousel, CCarouselItem } from '@coreui/react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@coreui/coreui/dist/css/coreui.min.css'
 

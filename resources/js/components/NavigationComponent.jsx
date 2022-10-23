@@ -1,7 +1,46 @@
 import React, { Component } from 'react';
+import { Navigate } from "react-router-dom";
+import TwitterComponent from  './TwitterComponent';
 
 class NavigationComponent extends Component {
+
+  state = {
+    isLoggedIn: null,
+    user: ''
+  }
+  
+  
+  handleIsLoggedIn = async() => {
+
+    if(localStorage.getItem('user')){
+        
+        this.state.user = JSON.parse(localStorage.getItem('user'));
+        console.log(this.state.user);
+        if(this.state.user.token) {
+            this.state.isLoggedIn = true
+        } else {
+            this.state.isLoggedIn = false
+        }
+
+        if(this.state.isLoggedIn) {
+            window.location.replace('/twitter')
+        } else {
+            window.location.replace('/login')
+        }
+
+        console.log(this.state.isLoggedIn);
+    } else {
+        window.location.replace('/login')
+    }
+    
+  }
+  
+  componentDidMount() {
+    this.handleIsLoggedIn();
+  }
+
   render() {
+
     return (
         <div> 
             <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm">
