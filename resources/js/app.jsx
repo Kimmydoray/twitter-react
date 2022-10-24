@@ -11,6 +11,7 @@ import DashboardComponent from  './components/Dashboard/DashboardComponent';
 import StageComponent from  './components/Dashboard/Stage/StageComponent';
 import AccountComponent from  './components/Dashboard/Account/AccountComponent';
 import NavigationComponent from './components/NavigationComponent';
+import StageEditComponent from  './components/Dashboard/Stage/StageEditComponent';
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="dashboard" element={<DashboardComponent />} />
                 <Route path="stage" element={<StageComponent />} />
                 <Route path="account" element={<AccountComponent />} />
+                <Route path="stage/edit/:id" element={<StageEditComponent />} />
             </Routes>
         </BrowserRouter>
     );

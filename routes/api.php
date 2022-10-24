@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-// Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/stage', "App\Http\Controllers\StageController@index");
     Route::get('/stage/{id}', "App\Http\Controllers\StageController@stageById");
     Route::post('/stage/update', "App\Http\Controllers\StageController@update");
@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/account', "App\Http\Controllers\AccountController@index");
     Route::post('/account/update', "App\Http\Controllers\AccountController@update");
-
+});
     Route::post('/login/sanctum', "App\Http\Controllers\LoginSanctumController@authenticate");
 
     

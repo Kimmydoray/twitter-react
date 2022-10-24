@@ -87,7 +87,9 @@ class StageComponent extends Component {
                                                     {/* <router-link :to="'/stage/edit/' + stage.id"  className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" title="Edit"> */}
                                                         <span className="svg-icon svg-icon-md svg-icon-primary">
                                                             
-                                                            <button >Edit</button>
+                                                            <a href={'/stage/edit/' + stage.id}>
+                                                                <button>Edit</button>
+                                                            </a> 
                                                             
                                                         </span>                            
                                                     {/* </router-link> */}

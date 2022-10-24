@@ -77,6 +77,15 @@ class AccountComponent extends Component {
         })
     }
 
+    // UPDATE ON
+    handleChange = async (event) => {
+        this.setState(prevState => ({ 
+            accountData: {
+                ...prevState.accountData, [event.target.name]: event.target.value 
+            }
+        }));
+    }
+
     // RUN ON LOAD
     componentDidMount() {
         this.getAccount();
@@ -102,7 +111,7 @@ class AccountComponent extends Component {
                                             <div className="col-xl-3">
                                                 <div className="form-group">
                                                     <label>Account ID</label>
-                                                    <input type="text" disabled={!this.state.is_edit} value={this.state.accountData.account_id} className="form-control"/>
+                                                    <input onChange={this.handleChange} name="account_id" type="text" disabled={!this.state.is_edit} defaultValue={this.state.accountData.account_id} className="form-control"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,7 +119,7 @@ class AccountComponent extends Component {
                                             <div className="col-xl-3">
                                                 <div className="form-group">
                                                     <label>Hashtag</label>
-                                                    <input disabled={!this.state.is_edit} value={this.state.accountData.hashtag} type="text" className="form-control"/>
+                                                    <input onChange={this.handleChange} name="hashtag" disabled={!this.state.is_edit} defaultValue={this.state.accountData.hashtag} type="text" className="form-control"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -119,14 +128,14 @@ class AccountComponent extends Component {
                                     { (!this.state.is_edit)? 
                                         <div className="card-footer">
                                             <button type="submit" onClick={this.handleOnEdit} className="btn btn-primary mx-3">Edit</button>
-                                            <button type="button" onClick={this.goBack} className="btn btn-secondary ml-3">Cancel</button>
+                                            <button type="button" className="btn btn-secondary ml-3">Cancel</button>
                                         </div>
                                         : ''
                                     }
                                     { (this.state.is_edit)? 
                                         <div className="card-footer" v-if="is_edit">
                                             <button type="submit" className="btn btn-primary mx-3">Submit</button>
-                                            <button type="button" onClick={this.goBack} className="btn btn-secondary ml-3">Cancel</button>
+                                            <button type="button" className="btn btn-secondary ml-3">Cancel</button>
                                         </div>
                                         : ''
                                     }

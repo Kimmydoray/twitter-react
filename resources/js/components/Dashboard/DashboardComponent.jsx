@@ -3,6 +3,11 @@ import { Navigate } from "react-router-dom";
 
 class DashboardComponent extends Component {
 
+    handleLogout = async() => {
+        localStorage.removeItem("user");
+        window.location.href = '/login';
+    }
+
     render() {
 
         return (
@@ -32,7 +37,7 @@ class DashboardComponent extends Component {
                                             {/* {{ user.name }} */}
                                         </a>
                                         <div className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                            <a className="dropdown-item">Logout</a>
+                                            <a className="dropdown-item" onClick={this.handleLogout}>Logout</a>
                                         </div>
                                     </li>
                                 </ul>

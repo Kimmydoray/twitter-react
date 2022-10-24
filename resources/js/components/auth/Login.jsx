@@ -20,7 +20,7 @@ function Login() {
 
         window.axios.post('/api/login/sanctum', loginCredentials).then((response) => {
             localStorage.setItem('user', JSON.stringify(response.data))
-            // window.location
+            window.location.href = '/dashboard'
             console.log('Logged successfully!')
         })
     }
